@@ -11,3 +11,8 @@ a{color:var(--green);text-decoration:none}
 .site-footer{text-align:center;padding:1rem;color:var(--muted);font-size:0.9rem}
 
 @media (max-width:420px){.site-header{padding:1.25rem}.container{margin:0.75rem}}
+
+/* Gallery styles */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin:1rem 0}
+.gallery img{width:100%;height:180px;object-fit:cover;border-radius:6px;box-shadow:0 1px 3px rgba(2,6,23,0.1)}
+.gallery-placeholder{background:#f0f0f0;border:2px dashed var(--muted);border-radius:6px;padding:2rem;text-align:center;color:var(--muted);font-size:0.9rem}
