@@ -8,9 +8,18 @@
 </head>
 <body>
   <header class="site-header">
+    <div class="top-bar">
+      <a class="home-button" href="../index.html">Home</a>
+      <div class="search-wrapper">
+        <input id="plantSearch" class="search-input" type="search" placeholder="Search plants..." aria-label="Search plant names">
+        <button id="searchClear" class="search-clear" type="button" aria-label="Clear search">×</button>
+      </div>
+    </div>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">☀️</button>
     <h1>Money Tree</h1>
     <p class="tagline">Plant care and location details for your garden</p>
   </header>
+  <script type="application/json" id="plant-search-data">[{"title": "Curry Leaf Tree", "url": "plants/curry-leaf-tree.html"}, {"title": "Downtown Miami Magic", "url": "plants/downtown-miami-magic.html"}, {"title": "English Ivy", "url": "plants/english-ivy.html"}, {"title": "Fiddleleaf Fig", "url": "plants/fiddleleaf-fig.html"}, {"title": "Giant Bird Of Paradise", "url": "plants/giant-bird-of-paradise.html"}, {"title": "Happy Bean", "url": "plants/happy-bean.html"}, {"title": "Hobbit", "url": "plants/hobbit.html"}, {"title": "Jade", "url": "plants/jade.html"}, {"title": "Japanese Maple", "url": "plants/japanese-maple.html"}, {"title": "Jasmine", "url": "plants/jasmine.html"}, {"title": "Kong Rose", "url": "plants/kong-rose.html"}, {"title": "Massangeana", "url": "plants/massangeana.html"}, {"title": "Money Tree", "url": "plants/money-tree.html"}, {"title": "Monstera", "url": "plants/monstera.html"}, {"title": "Moss Rose", "url": "plants/moss-rose.html"}, {"title": "Painted Nettle", "url": "plants/painted-nettle.html"}, {"title": "Pathos", "url": "plants/pathos.html"}, {"title": "Perle Von Nuremburg", "url": "plants/perle-von-nuremburg.html"}, {"title": "Petunia", "url": "plants/petunia.html"}, {"title": "Spider Plant", "url": "plants/spider-plant.html"}, {"title": "Split Leaf Philodendron", "url": "plants/split-leaf-philodendron.html"}, {"title": "Stevia", "url": "plants/stevia.html"}, {"title": "Topsy Turvy", "url": "plants/topsy-turvy.html"}, {"title": "Tulasi", "url": "plants/tulasi.html"}, {"title": "Turtle Vine", "url": "plants/turtle-vine.html"}, {"title": "Wandering Dude", "url": "plants/wandering-dude.html"}]</script>
   <main class="container">
     <section class="card">
       <img class="plant-image" src="../images/money_tree.jpeg" alt="Money Tree">
@@ -27,13 +36,13 @@
         <h2>Plant overview</h2>
         <dl class="meta-list">
           <dt>Scientific name</dt>
-          <dd>Update with scientific name</dd>
+          <dd>Pachira aquatica</dd>
           <dt>Plant type</dt>
-          <dd>Annual / Perennial / Houseplant</dd>
+          <dd>Indoor tree</dd>
           <dt>USDA hardiness</dt>
-          <dd>Update your zone</dd>
+          <dd>USDA 10–12</dd>
           <dt>Bloom time</dt>
-          <dd>Update bloom or harvest season</dd>
+          <dd>Rarely indoors</dd>
         </dl>
       </div>
 
@@ -41,13 +50,13 @@
         <h2>Plant status</h2>
         <dl class="meta-list">
           <dt>Location</dt>
-          <dd>Update with garden zone or room</dd>
+          <dd>Bright living room or office</dd>
           <dt>Date planted</dt>
-          <dd>Update when planted</dd>
+          <dd>Add your planting date</dd>
           <dt>Last watered</dt>
-          <dd>Add your last watering date</dd>
+          <dd>Water when the top 1–2 inches dry</dd>
           <dt>Notes</dt>
-          <dd>Add quick notes on growth, pests, or progress</dd>
+          <dd>Often grown as a cheerful indoor focal point with braided stems.</dd>
         </dl>
       </div>
     </section>
@@ -57,27 +66,27 @@
       <div class="section-grid">
         <article>
           <h3>Sun</h3>
-          <p>Update sun requirements for this plant.</p>
+          <p>Bright filtered light.</p>
         </article>
         <article>
           <h3>Water</h3>
-          <p>Update watering frequency and amount.</p>
+          <p>Water thoroughly and let excess drain away.</p>
         </article>
         <article>
           <h3>Soil</h3>
-          <p>Update the soil type and mix.</p>
+          <p>Well-draining potting soil.</p>
         </article>
         <article>
           <h3>Fertilizer</h3>
-          <p>Update your feed schedule and product.</p>
+          <p>Feed lightly once a month in warm months.</p>
         </article>
         <article>
           <h3>Pruning</h3>
-          <p>Update pruning or maintenance notes.</p>
+          <p>Trim lightly to maintain shape.</p>
         </article>
         <article>
           <h3>Companions</h3>
-          <p>Update companion plants and placement.</p>
+          <p>Pairs well with other sculptural indoor plants.</p>
         </article>
       </div>
     </section>
@@ -89,6 +98,6 @@
     </section>
   </main>
   <footer class="site-footer">© 2026 Family Garden</footer>
-  <script src="../weather.js"></script>
+  <script src="../theme.js"></script>  <script src="../search.js"></script>  <script src="../weather.js"></script>
 </body>
 </html>

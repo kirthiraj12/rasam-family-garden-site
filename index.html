@@ -7,19 +7,42 @@
   <link rel="stylesheet" href="styles.css">
   <meta name="description" content="Personal plant garden - care notes and photos">
 </head>
-<body>
+<body class="homepage">
   <header class="site-header">
+    <div class="top-bar">
+      <a class="home-button" href="index.html">Home</a>
+      <div class="search-wrapper">
+        <input id="plantSearch" class="search-input" type="search" placeholder="Search plants..." aria-label="Search plant names">
+        <button id="searchClear" class="search-clear" type="button" aria-label="Clear search">×</button>
+      </div>
+    </div>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">☀️</button>
     <h1>Family Garden</h1>
     <p class="tagline">Plants I care for and their care notes</p>
   </header>
+  <script type="application/json" id="plant-search-data">[{"title": "Curry Leaf Tree", "url": "plants/curry-leaf-tree.html"}, {"title": "Downtown Miami Magic", "url": "plants/downtown-miami-magic.html"}, {"title": "English Ivy", "url": "plants/english-ivy.html"}, {"title": "Fiddleleaf Fig", "url": "plants/fiddleleaf-fig.html"}, {"title": "Giant Bird Of Paradise", "url": "plants/giant-bird-of-paradise.html"}, {"title": "Happy Bean", "url": "plants/happy-bean.html"}, {"title": "Hobbit", "url": "plants/hobbit.html"}, {"title": "Jade", "url": "plants/jade.html"}, {"title": "Japanese Maple", "url": "plants/japanese-maple.html"}, {"title": "Jasmine", "url": "plants/jasmine.html"}, {"title": "Kong Rose", "url": "plants/kong-rose.html"}, {"title": "Massangeana", "url": "plants/massangeana.html"}, {"title": "Money Tree", "url": "plants/money-tree.html"}, {"title": "Monstera", "url": "plants/monstera.html"}, {"title": "Moss Rose", "url": "plants/moss-rose.html"}, {"title": "Painted Nettle", "url": "plants/painted-nettle.html"}, {"title": "Pathos", "url": "plants/pathos.html"}, {"title": "Perle Von Nuremburg", "url": "plants/perle-von-nuremburg.html"}, {"title": "Petunia", "url": "plants/petunia.html"}, {"title": "Spider Plant", "url": "plants/spider-plant.html"}, {"title": "Split Leaf Philodendron", "url": "plants/split-leaf-philodendron.html"}, {"title": "Stevia", "url": "plants/stevia.html"}, {"title": "Topsy Turvy", "url": "plants/topsy-turvy.html"}, {"title": "Tulasi", "url": "plants/tulasi.html"}, {"title": "Turtle Vine", "url": "plants/turtle-vine.html"}, {"title": "Wandering Dude", "url": "plants/wandering-dude.html"}]</script>
 
   <main class="container">
-    <section class='category-section'>
-      <div class='category-header'>
-        <h2>Flowers</h2>
-        <span>6 plants</span>
+    <section class="hero-card">
+      <div>
+        <p class="eyebrow">Browse your garden</p>
+        <h2>Flowers, vines, herbs, and indoor favorites are grouped so the collection stays easy to scan.</h2>
       </div>
-      <div class='plant-grid'>
+      <div class="browse-links">
+      <a class='browse-link' href='#flowers'>🌸 Flowers</a>
+      <a class='browse-link' href='#vines--climbers'>🌿 Vines &amp; Climbers</a>
+      <a class='browse-link' href='#herbs'>🌿 Herbs</a>
+      <a class='browse-link' href='#indoor-plants'>🪴 Indoor Plants</a>
+      <a class='browse-link' href='#perennials'>🌳 Perennials</a>
+      <a class='browse-link' href='#other'>🌱 Other</a>
+      </div>
+    </section>
+    <section class='category-section' id='flowers'>
+      <div class='category-header'>
+        <h2>🌸 Flowers</h2>
+        <span>5 plants</span>
+      </div>
+      <div class='plant-row'>
       <article class='plant-card'>
         <a href='plants/jasmine.html'>
           <div class='plant-card-image-frame'>
@@ -56,12 +79,75 @@
           <p>Tap to view its care page.</p>
         </a>
       </article>
+      </div>
+      <div class='plant-row'>
       <article class='plant-card'>
         <a href='plants/petunia.html'>
           <div class='plant-card-image-frame'>
             <img src='images/petunia.jpeg' alt='Petunia thumbnail'>
           </div>
           <h2>Petunia</h2>
+          <p>Tap to view its care page.</p>
+        </a>
+      </article>
+      </div>
+    </section>
+    <section class='category-section' id='vines--climbers'>
+      <div class='category-header'>
+        <h2>🌿 Vines &amp; Climbers</h2>
+        <span>3 plants</span>
+      </div>
+      <div class='plant-row'>
+      <article class='plant-card'>
+        <a href='plants/english-ivy.html'>
+          <div class='plant-card-image-frame'>
+            <img src='images/english_ivy.jpeg' alt='English Ivy thumbnail'>
+          </div>
+          <h2>English Ivy</h2>
+          <p>Tap to view its care page.</p>
+        </a>
+      </article>
+      <article class='plant-card'>
+        <a href='plants/turtle-vine.html'>
+          <div class='plant-card-image-frame'>
+            <img src='images/turtle_vine.jpeg' alt='Turtle Vine thumbnail'>
+          </div>
+          <h2>Turtle Vine</h2>
+          <p>Tap to view its care page.</p>
+        </a>
+      </article>
+      <article class='plant-card'>
+        <a href='plants/wandering-dude.html'>
+          <div class='plant-card-image-frame'>
+            <img src='images/wandering_dude.jpeg' alt='Wandering Dude thumbnail'>
+          </div>
+          <h2>Wandering Dude</h2>
+          <p>Tap to view its care page.</p>
+        </a>
+      </article>
+      </div>
+    </section>
+    <section class='category-section' id='herbs'>
+      <div class='category-header'>
+        <h2>🌿 Herbs</h2>
+        <span>3 plants</span>
+      </div>
+      <div class='plant-row'>
+      <article class='plant-card'>
+        <a href='plants/curry-leaf-tree.html'>
+          <div class='plant-card-image-frame'>
+            <img src='images/curry_leaf_tree.jpeg' alt='Curry Leaf Tree thumbnail'>
+          </div>
+          <h2>Curry Leaf Tree</h2>
+          <p>Tap to view its care page.</p>
+        </a>
+      </article>
+      <article class='plant-card'>
+        <a href='plants/stevia.html'>
+          <div class='plant-card-image-frame'>
+            <img src='images/stevia.jpeg' alt='Stevia thumbnail'>
+          </div>
+          <h2>Stevia</h2>
           <p>Tap to view its care page.</p>
         </a>
       </article>
@@ -76,38 +162,12 @@
       </article>
       </div>
     </section>
-    <section class='category-section'>
+    <section class='category-section' id='indoor-plants'>
       <div class='category-header'>
-        <h2>Vegetables</h2>
-        <span>1 plants</span>
+        <h2>🪴 Indoor Plants</h2>
+        <span>7 plants</span>
       </div>
-      <div class='plant-grid'>
-      <article class='plant-card'>
-        <a href='plants/stevia.html'>
-          <div class='plant-card-image-frame'>
-            <img src='images/stevia.jpeg' alt='Stevia thumbnail'>
-          </div>
-          <h2>Stevia</h2>
-          <p>Tap to view its care page.</p>
-        </a>
-      </article>
-      </div>
-    </section>
-    <section class='category-section'>
-      <div class='category-header'>
-        <h2>Indoor Plants</h2>
-        <span>10 plants</span>
-      </div>
-      <div class='plant-grid'>
-      <article class='plant-card'>
-        <a href='plants/english-ivy.html'>
-          <div class='plant-card-image-frame'>
-            <img src='images/english_ivy.jpeg' alt='English Ivy thumbnail'>
-          </div>
-          <h2>English Ivy</h2>
-          <p>Tap to view its care page.</p>
-        </a>
-      </article>
+      <div class='plant-row'>
       <article class='plant-card'>
         <a href='plants/fiddleleaf-fig.html'>
           <div class='plant-card-image-frame'>
@@ -144,6 +204,8 @@
           <p>Tap to view its care page.</p>
         </a>
       </article>
+      </div>
+      <div class='plant-row'>
       <article class='plant-card'>
         <a href='plants/monstera.html'>
           <div class='plant-card-image-frame'>
@@ -171,32 +233,14 @@
           <p>Tap to view its care page.</p>
         </a>
       </article>
-      <article class='plant-card'>
-        <a href='plants/turtle-vine.html'>
-          <div class='plant-card-image-frame'>
-            <img src='images/turtle_vine.jpeg' alt='Turtle Vine thumbnail'>
-          </div>
-          <h2>Turtle Vine</h2>
-          <p>Tap to view its care page.</p>
-        </a>
-      </article>
-      <article class='plant-card'>
-        <a href='plants/wandering-dude.html'>
-          <div class='plant-card-image-frame'>
-            <img src='images/wandering_dude.jpeg' alt='Wandering Dude thumbnail'>
-          </div>
-          <h2>Wandering Dude</h2>
-          <p>Tap to view its care page.</p>
-        </a>
-      </article>
       </div>
     </section>
-    <section class='category-section'>
+    <section class='category-section' id='perennials'>
       <div class='category-header'>
-        <h2>Perennials</h2>
+        <h2>🌳 Perennials</h2>
         <span>2 plants</span>
       </div>
-      <div class='plant-grid'>
+      <div class='plant-row'>
       <article class='plant-card'>
         <a href='plants/giant-bird-of-paradise.html'>
           <div class='plant-card-image-frame'>
@@ -217,21 +261,12 @@
       </article>
       </div>
     </section>
-    <section class='category-section'>
+    <section class='category-section' id='other'>
       <div class='category-header'>
-        <h2>Other</h2>
-        <span>7 plants</span>
+        <h2>🌱 Other</h2>
+        <span>6 plants</span>
       </div>
-      <div class='plant-grid'>
-      <article class='plant-card'>
-        <a href='plants/curry-leaf-tree.html'>
-          <div class='plant-card-image-frame'>
-            <img src='images/curry_leaf_tree.jpeg' alt='Curry Leaf Tree thumbnail'>
-          </div>
-          <h2>Curry Leaf Tree</h2>
-          <p>Tap to view its care page.</p>
-        </a>
-      </article>
+      <div class='plant-row'>
       <article class='plant-card'>
         <a href='plants/downtown-miami-magic.html'>
           <div class='plant-card-image-frame'>
@@ -268,6 +303,8 @@
           <p>Tap to view its care page.</p>
         </a>
       </article>
+      </div>
+      <div class='plant-row'>
       <article class='plant-card'>
         <a href='plants/perle-von-nuremburg.html'>
           <div class='plant-card-image-frame'>
@@ -291,5 +328,7 @@
   </main>
 
   <footer class="site-footer">© 2026 Family Garden</footer>
+  <script src="theme.js"></script>
+  <script src="search.js"></script>
 </body>
 </html>
