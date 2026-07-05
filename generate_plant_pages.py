@@ -55,6 +55,11 @@ def plant_page_html(title: str, image_path: str, image_filename: str) -> str:
       <p class=\"image-caption\">Photo: {html.escape(image_filename)}</p>
     </section>
 
+    <section class=\"card weather-card\">
+      <h2>Current weather (ZIP 60503)</h2>
+      <div class=\"weather-content\"></div>
+    </section>
+
     <section class=\"card section-grid\">
       <div>
         <h2>Plant overview</h2>
@@ -122,6 +127,7 @@ def plant_page_html(title: str, image_path: str, image_filename: str) -> str:
     </section>
   </main>
   <footer class=\"site-footer\">© 2026 Family Garden</footer>
+  <script src=\"../weather.js\"></script>
 </body>
 </html>"""
 

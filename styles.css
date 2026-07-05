@@ -209,6 +209,64 @@ a:hover {
   font-size: 0.95rem;
 }
 
+.weather-card {
+  padding: 1.5rem;
+}
+
+.weather-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.weather-summary div {
+  background: var(--green-soft);
+  border-radius: 20px;
+  padding: 1rem;
+  border: 1px solid rgba(44, 122, 59, 0.12);
+}
+
+.weather-label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  color: var(--green);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.weather-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.weather-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.weather-details div {
+  border-radius: 18px;
+  background: var(--surface-strong);
+  border: 1px solid rgba(44, 122, 59, 0.08);
+  padding: 0.9rem 1rem;
+}
+
+.weather-details span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.weather-details strong {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 1.05rem;
+}
+
 .section-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
