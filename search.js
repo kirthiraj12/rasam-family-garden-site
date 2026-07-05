@@ -112,11 +112,28 @@ function initSearch() {
 
   input.setAttribute('list', 'plant-search-list');
 
-  if (document.body.classList.contains('homepage')) {
-    input.addEventListener('input', () => {
-      filterHomepage(input.value);
-    });
-  }
+  // When typing, if the typed value exactly matches a plant title, navigate
+  // directly to that plant page (works for datalist selection clicks too).
+  input.addEventListener('input', () => {
+    const value = input.value || '';
+    const exact = searchData.find((item) => normalize(item.title) === normalize(value));
+    if (exact) {
+      redirectToPlant(exact.url);
+      return;
+    }
+
+    // Only filter the homepage plant grid for partial queries
+    if (document.body.classList.contains('homepage')) {
+      filterHomepage(value);
+    }
+  });
+
+  // Some browsers fire 'change' when a datalist option is picked — handle that too.
+  input.addEventListener('change', () => {
+    const value = input.value || '';
+    const exact = searchData.find((item) => normalize(item.title) === normalize(value));
+    if (exact) redirectToPlant(exact.url);
+  });
 
   input.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
