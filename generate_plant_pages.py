@@ -132,14 +132,39 @@ def plant_page_html(title: str, image_path: str, image_filename: str) -> str:
 </html>"""
 
 
+def categorize_plant(title: str) -> str:
+    title_lower = title.lower()
+    categories = [
+        ("Flowers", ["rose", "jasmine", "petunia", "moss", "tulasi", "nettle", "garden", "flower", "orchid"]),
+        ("Vegetables", ["tomato", "pepper", "beans", "stevia", "corn", "lettuce", "carrot", "peas"]),
+        ("Herbs", ["basil", "tulasi", "mint", "sage", "rosemary", "thyme", "oregano", "stevia"]),
+        ("Indoor Plants", ["pothos", "snake", "monstera", "jade", "money", "hobbit", "turtle", "wandering", "english", "fiddleleaf", "spider", "philodendron", "fig"]),
+        ("Perennials", ["japanese", "maple", "moss", "rose", "ivy", "money", "garden", "bird", "paradise"]),
+    ]
+    for category, keywords in categories:
+        for keyword in keywords:
+            if keyword in title_lower:
+                return category
+    return "Other"
+
+
 def make_index_html(items: list[tuple[str, str, str]]) -> str:
-    cards = []
+    sections: dict[str, list[str]] = {}
     for title, page, image in items:
-        cards.append(
-            f"      <article class='plant-card'>\n        <a href='{html.escape(page)}'>\n          <img src='{html.escape(image)}' alt='{html.escape(title)} thumbnail'>\n          <h2>{html.escape(title)}</h2>\n          <p>Tap to view its care page.</p>\n        </a>\n      </article>"
+        category = categorize_plant(title)
+        sections.setdefault(category, []).append(
+            f"      <article class='plant-card'>\n        <a href='{html.escape(page)}'>\n          <div class='plant-card-image-frame'>\n            <img src='{html.escape(image)}' alt='{html.escape(title)} thumbnail'>\n          </div>\n          <h2>{html.escape(title)}</h2>\n          <p>Tap to view its care page.</p>\n        </a>\n      </article>"
         )
 
-    cards_html = "\n".join(cards)
+    categories_html = []
+    for category in ["Flowers", "Vegetables", "Herbs", "Indoor Plants", "Perennials", "Other"]:
+        cards = sections.get(category)
+        if not cards:
+            continue
+        categories_html.append(
+            f"    <section class='category-section'>\n      <div class='category-header'>\n        <h2>{html.escape(category)}</h2>\n        <span>{len(cards)} plants</span>\n      </div>\n      <div class='plant-grid'>\n{chr(10).join(cards)}\n      </div>\n    </section>"
+        )
+
     return f"""<!doctype html>
 <html lang=\"en\">
 <head>
@@ -156,9 +181,7 @@ def make_index_html(items: list[tuple[str, str, str]]) -> str:
   </header>
 
   <main class=\"container\">
-    <section class=\"plant-grid\">
-{cards_html}
-    </section>
+{chr(10).join(categories_html)}
   </main>
 
   <footer class=\"site-footer\">© 2026 Family Garden</footer>

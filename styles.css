@@ -149,6 +149,28 @@ a:hover {
   margin-top: 0;
 }
 
+.category-section {
+  margin-top: 2.75rem;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.category-header h2 {
+  margin: 0;
+  font-size: 1.7rem;
+}
+
+.category-header span {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 .plant-card {
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -163,10 +185,21 @@ a:hover {
   color: inherit;
 }
 
-.plant-card img {
-  width: 100%;
-  height: 210px;
-  object-fit: cover;
+.plant-card-image-frame {
+  background: var(--surface-strong);
+  border-bottom: 1px solid rgba(44, 122, 59, 0.08);
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.plant-card-image-frame img {
+  width: auto;
+  max-width: 100%;
+  max-height: 220px;
+  object-fit: contain;
 }
 
 .plant-card h2 {
@@ -284,9 +317,10 @@ a:hover {
     padding: 2.75rem 1rem 1.5rem;
   }
 
-  .plant-card img {
-    height: 170px;
+  .plant-card-image-frame {
+    min-height: 170px;
   }
 }
+
 .plant-image{width:100%;max-width:720px;height:540px;object-fit:cover;border-radius:12px;margin:0 auto;display:block}
 
