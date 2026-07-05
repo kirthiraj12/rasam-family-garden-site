@@ -85,11 +85,11 @@ def plant_page_html(title: str, image_path: str, image_filename: str) -> str:
 </html>"""
 
 
-def make_index_html(items: list[tuple[str, str]]) -> str:
+def make_index_html(items: list[tuple[str, str, str]]) -> str:
     cards = []
-    for title, page in items:
+    for title, page, image in items:
         cards.append(
-            f"      <article class='card'>\n        <h2><a href='{html.escape(page)}'>{html.escape(title)}</a></h2>\n        <p>View the plant photo and care page for {html.escape(title)}.</p>\n      </article>"
+            f"      <article class='plant-card'>\n        <a href='{html.escape(page)}'>\n          <img src='{html.escape(image)}' alt='{html.escape(title)} thumbnail'>\n          <h2>{html.escape(title)}</h2>\n          <p>Tap to view its care page.</p>\n        </a>\n      </article>"
         )
 
     cards_html = "\n".join(cards)
@@ -109,7 +109,7 @@ def make_index_html(items: list[tuple[str, str]]) -> str:
   </header>
 
   <main class=\"container\">
-    <section class=\"grid\">
+    <section class=\"plant-grid\">
 {cards_html}
     </section>
   </main>
@@ -129,7 +129,7 @@ def main() -> None:
     if not image_files:
         raise SystemExit("No image files found in the images directory.")
 
-    pages: list[tuple[str, str]] = []
+    pages: list[tuple[str, str, str]] = []
     for image_file in image_files:
         stem = image_file.stem
         title = titleize(stem)
@@ -139,7 +139,7 @@ def main() -> None:
         image_path = f"../images/{image_file.name}"
         page_html = plant_page_html(title, image_path, image_file.name)
         page_path.write_text(page_html, encoding="utf-8")
-        pages.append((title, f"plants/{page_name}"))
+        pages.append((title, f"plants/{page_name}", f"images/{image_file.name}"))
 
     INDEX_FILE.write_text(make_index_html(pages), encoding="utf-8")
 
