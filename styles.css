@@ -103,6 +103,40 @@ a:hover {
   padding: 1.5rem;
 }
 
+.section-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.section-grid article {
+  background: var(--surface-strong);
+  border-radius: 18px;
+  padding: 1rem;
+  border: 1px solid rgba(44,122,59,0.08);
+}
+
+.section-grid article h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1rem;
+}
+
+.meta-list {
+  display: grid;
+  gap: 0.75rem 1.25rem;
+  grid-template-columns: minmax(120px, 180px) 1fr;
+}
+
+.meta-list dt {
+  font-weight: 700;
+  color: var(--green);
+}
+
+.meta-list dd {
+  margin: 0;
+  color: var(--muted);
+}
+
 .hero-card {
   display: grid;
   grid-template-columns: 1fr;
