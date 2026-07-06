@@ -8,6 +8,7 @@ SITE_DIR = Path(__file__).resolve().parent
 IMAGE_DIR = SITE_DIR / "images"
 PLANT_DIR = SITE_DIR / "plants"
 INDEX_FILE = SITE_DIR / "index.html"
+SITE_TITLE = "Rasam Family Garden"
 
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
 
@@ -528,12 +529,13 @@ def search_data_script(items: list[tuple[str, str, str, dict[str, str]]]) -> str
 
 def plant_page_html(title: str, slug: str, image_path: str, image_filename: str, details: dict[str, str], search_script: str) -> str:
     storage_key = f"plant-data-{slug}"
+    image_src = image_path if image_path.startswith("../") else f"../{image_path.lstrip('/')}"
     template = '''<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>%%TITLE%% — Family Garden</title>
+  <title>%%TITLE%% — %%SITE_TITLE%%</title>
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
@@ -627,7 +629,7 @@ def plant_page_html(title: str, slug: str, image_path: str, image_filename: str,
       <p><a href="../index.html">← Back to home</a></p>
     </section>
   </main>
-  <footer class="site-footer">© 2026 Family Garden</footer>
+  <footer class="site-footer">© 2026 %%SITE_TITLE%%</footer>
   <script>
     (function(){
       const key = "__STORAGE_KEY__";
@@ -659,8 +661,9 @@ def plant_page_html(title: str, slug: str, image_path: str, image_filename: str,
 </html>'''
 
     out = template.replace('%%TITLE%%', html.escape(title))
+    out = out.replace('%%SITE_TITLE%%', SITE_TITLE)
     out = out.replace('%%SEARCH_SCRIPT%%', search_script)
-    out = out.replace('%%IMAGE_PATH%%', html.escape(image_path))
+    out = out.replace('%%IMAGE_PATH%%', html.escape(image_src))
     out = out.replace('%%IMAGE_FILENAME%%', html.escape(image_filename))
     out = out.replace('%%SCIENTIFIC%%', html.escape(details.get('scientific_name','')))
     out = out.replace('%%PLANT_TYPE%%', html.escape(details.get('plant_type','')))
