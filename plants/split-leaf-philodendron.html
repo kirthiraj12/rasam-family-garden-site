@@ -22,7 +22,7 @@
   <script type="application/json" id="plant-search-data">[{"title": "Curry Leaf Tree", "url": "plants/curry-leaf-tree.html"}, {"title": "Downtown Miami Magic", "url": "plants/downtown-miami-magic.html"}, {"title": "English Ivy", "url": "plants/english-ivy.html"}, {"title": "Fiddleleaf Fig", "url": "plants/fiddleleaf-fig.html"}, {"title": "Giant Bird Of Paradise", "url": "plants/giant-bird-of-paradise.html"}, {"title": "Happy Bean", "url": "plants/happy-bean.html"}, {"title": "Hobbit", "url": "plants/hobbit.html"}, {"title": "Jade", "url": "plants/jade.html"}, {"title": "Japanese Maple", "url": "plants/japanese-maple.html"}, {"title": "Jasmine", "url": "plants/jasmine.html"}, {"title": "Kong Rose", "url": "plants/kong-rose.html"}, {"title": "Massangeana", "url": "plants/massangeana.html"}, {"title": "Money Tree", "url": "plants/money-tree.html"}, {"title": "Monstera", "url": "plants/monstera.html"}, {"title": "Moss Rose", "url": "plants/moss-rose.html"}, {"title": "Painted Nettle", "url": "plants/painted-nettle.html"}, {"title": "Pathos", "url": "plants/pathos.html"}, {"title": "Perle Von Nuremburg", "url": "plants/perle-von-nuremburg.html"}, {"title": "Petunia", "url": "plants/petunia.html"}, {"title": "Spider Plant", "url": "plants/spider-plant.html"}, {"title": "Split Leaf Philodendron", "url": "plants/split-leaf-philodendron.html"}, {"title": "Stevia", "url": "plants/stevia.html"}, {"title": "Topsy Turvy", "url": "plants/topsy-turvy.html"}, {"title": "Tulasi", "url": "plants/tulasi.html"}, {"title": "Turtle Vine", "url": "plants/turtle-vine.html"}, {"title": "Wandering Dude", "url": "plants/wandering-dude.html"}]</script>
   <main class="container">
     <section class="card">
-      <img class="plant-image" src="../images/split-leaf_philodendron.jpeg" alt="Split Leaf Philodendron">
+      <img class="plant-image" src="images/split-leaf_philodendron.jpeg" alt="Split Leaf Philodendron">
       <p class="image-caption">Photo: split-leaf_philodendron.jpeg</p>
     </section>
 
@@ -36,13 +36,13 @@
         <h2>Plant overview</h2>
         <dl class="meta-list">
           <dt>Scientific name</dt>
-          <dd>Philodendron bipinnatifidum</dd>
+          <dd class="editable" data-key="scientific_name">Philodendron bipinnatifidum</dd>
           <dt>Plant type</dt>
-          <dd>Tropical houseplant</dd>
+          <dd class="editable" data-key="plant_type">Tropical houseplant</dd>
           <dt>USDA hardiness</dt>
-          <dd>USDA 10–12</dd>
+          <dd class="editable" data-key="hardiness">USDA 10–12</dd>
           <dt>Bloom time</dt>
-          <dd>Rarely indoors</dd>
+          <dd class="editable" data-key="bloom_time">Rarely indoors</dd>
         </dl>
       </div>
 
@@ -50,13 +50,13 @@
         <h2>Plant status</h2>
         <dl class="meta-list">
           <dt>Location</dt>
-          <dd>Bright indoor corner with support</dd>
+          <dd class="editable" data-key="location">Bright indoor corner with support</dd>
           <dt>Date planted</dt>
-          <dd>Add your planting date</dd>
+          <dd class="editable" data-key="date_planted">Add your planting date</dd>
           <dt>Last watered</dt>
-          <dd>Water when the top 1–2 inches dry</dd>
+          <dd class="editable" data-key="last_watered">Water when the top 1–2 inches dry</dd>
           <dt>Notes</dt>
-          <dd>A strong, statement-making plant with deeply cut leaves.</dd>
+          <dd class="editable" data-key="notes">A strong, statement-making plant with deeply cut leaves.</dd>
         </dl>
       </div>
     </section>
@@ -93,11 +93,37 @@
 
     <section class="card">
       <h2>Personal notes</h2>
-      <p>Add your experience, pests, recipes, or harvest details here.</p>
+      <div id="personal-notes" class="editable-block" contenteditable="true">Add your experience, pests, recipes, or harvest details here.</div>
       <p><a href="../index.html">← Back to home</a></p>
     </section>
   </main>
   <footer class="site-footer">© 2026 Family Garden</footer>
+  <script>
+    (function(){
+      const key = "plant-data-split-leaf-philodendron";
+      const saved = localStorage.getItem(key);
+      let data = saved ? JSON.parse(saved) : {};
+      document.addEventListener('DOMContentLoaded', ()=>{
+        document.querySelectorAll('.editable').forEach((el)=>{
+          const k = el.dataset.key;
+          if (data[k]) el.textContent = data[k];
+          el.setAttribute('contenteditable','true');
+          el.addEventListener('blur', ()=>{
+            data[k] = el.textContent.trim();
+            localStorage.setItem(key, JSON.stringify(data));
+          });
+        });
+        const notes = document.getElementById('personal-notes');
+        if (notes) {
+          if (data['personal_notes']) notes.textContent = data['personal_notes'];
+          notes.addEventListener('blur', ()=>{
+            data['personal_notes'] = notes.textContent.trim();
+            localStorage.setItem(key, JSON.stringify(data));
+          });
+        }
+      });
+    })();
+  </script>
   <script src="../theme.js"></script>  <script src="../search.js"></script>  <script src="../weather.js"></script>
 </body>
 </html>

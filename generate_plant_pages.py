@@ -12,13 +12,11 @@ INDEX_FILE = SITE_DIR / "index.html"
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
 
 OLD_SAMPLE_PAGES = {
-    "monstera.html",
-    "pepper.html",
-    "tomato.html",
-    "basil.html",
-    "pothos.html",
-    "snake-plant.html",
-    "spider-plant.html",
+  "pepper.html",
+  "tomato.html",
+  "basil.html",
+  "pothos.html",
+  "snake-plant.html",
 }
 
 PLANT_DETAILS = {
@@ -528,244 +526,156 @@ def search_data_script(items: list[tuple[str, str, str, dict[str, str]]]) -> str
     return f'<script type="application/json" id="plant-search-data">{json_text}</script>'
 
 
-def plant_page_html(title: str, image_path: str, image_filename: str, details: dict[str, str], search_script: str) -> str:
-    return f"""<!doctype html>
-<html lang=\"en\">
+def plant_page_html(title: str, slug: str, image_path: str, image_filename: str, details: dict[str, str], search_script: str) -> str:
+    storage_key = f"plant-data-{slug}"
+    template = '''<!doctype html>
+<html lang="en">
 <head>
-  <meta charset=\"utf-8\">
-  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">
-  <title>{html.escape(title)} — Family Garden</title>
-  <link rel=\"stylesheet\" href=\"../styles.css\">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>%%TITLE%% — Family Garden</title>
+  <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-  <header class=\"site-header\">
-    <div class=\"top-bar\">
-      <a class=\"home-button\" href=\"../index.html\">Home</a>
-      <div class=\"search-wrapper\">
-        <input id=\"plantSearch\" class=\"search-input\" type=\"search\" placeholder=\"Search plants...\" aria-label=\"Search plant names\">
-        <button id=\"searchClear\" class=\"search-clear\" type=\"button\" aria-label=\"Clear search\">×</button>
+  <header class="site-header">
+    <div class="top-bar">
+      <a class="home-button" href="../index.html">Home</a>
+      <div class="search-wrapper">
+        <input id="plantSearch" class="search-input" type="search" placeholder="Search plants..." aria-label="Search plant names">
+        <button id="searchClear" class="search-clear" type="button" aria-label="Clear search">×</button>
       </div>
     </div>
-    <button class=\"theme-toggle\" id=\"themeToggle\" type=\"button\" aria-label=\"Toggle dark mode\">☀️</button>
-    <h1>{html.escape(title)}</h1>
-    <p class=\"tagline\">Plant care and location details for your garden</p>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">☀️</button>
+    <h1>%%TITLE%%</h1>
+    <p class="tagline">Plant care and location details for your garden</p>
   </header>
-  {search_script}
-  <main class=\"container\">
-    <section class=\"card\">
-      <img class=\"plant-image\" src=\"{html.escape(image_path)}\" alt=\"{html.escape(title)}\">
-      <p class=\"image-caption\">Photo: {html.escape(image_filename)}</p>
+  %%SEARCH_SCRIPT%%
+  <main class="container">
+    <section class="card">
+      <img class="plant-image" src="%%IMAGE_PATH%%" alt="%%TITLE%%">
+      <p class="image-caption">Photo: %%IMAGE_FILENAME%%</p>
     </section>
 
-    <section class=\"card weather-card\">
+    <section class="card weather-card">
       <h2>Current weather (ZIP 60503)</h2>
-      <div class=\"weather-content\"></div>
+      <div class="weather-content"></div>
     </section>
 
-    <section class=\"card section-grid\">
+    <section class="card section-grid">
       <div>
         <h2>Plant overview</h2>
-        <dl class=\"meta-list\">
+        <dl class="meta-list">
           <dt>Scientific name</dt>
-          <dd>{html.escape(details['scientific_name'])}</dd>
+          <dd class="editable" data-key="scientific_name">%%SCIENTIFIC%%</dd>
           <dt>Plant type</dt>
-          <dd>{html.escape(details['plant_type'])}</dd>
+          <dd class="editable" data-key="plant_type">%%PLANT_TYPE%%</dd>
           <dt>USDA hardiness</dt>
-          <dd>{html.escape(details['hardiness'])}</dd>
+          <dd class="editable" data-key="hardiness">%%HARDINESS%%</dd>
           <dt>Bloom time</dt>
-          <dd>{html.escape(details['bloom_time'])}</dd>
+          <dd class="editable" data-key="bloom_time">%%BLOOM_TIME%%</dd>
         </dl>
       </div>
 
       <div>
         <h2>Plant status</h2>
-        <dl class=\"meta-list\">
+        <dl class="meta-list">
           <dt>Location</dt>
-          <dd>{html.escape(details['location'])}</dd>
+          <dd class="editable" data-key="location">%%LOCATION%%</dd>
           <dt>Date planted</dt>
-          <dd>{html.escape(details['date_planted'])}</dd>
+          <dd class="editable" data-key="date_planted">%%DATE_PLANTED%%</dd>
           <dt>Last watered</dt>
-          <dd>{html.escape(details['last_watered'])}</dd>
+          <dd class="editable" data-key="last_watered">%%LAST_WATERED%%</dd>
           <dt>Notes</dt>
-          <dd>{html.escape(details['notes'])}</dd>
+          <dd class="editable" data-key="notes">%%NOTES%%</dd>
         </dl>
       </div>
     </section>
 
-    <section class=\"card\">
+    <section class="card">
       <h2>Care guide</h2>
-      <div class=\"section-grid\">
+      <div class="section-grid">
         <article>
           <h3>Sun</h3>
-          <p>{html.escape(details['sun'])}</p>
+          <p>%%SUN%%</p>
         </article>
         <article>
           <h3>Water</h3>
-          <p>{html.escape(details['water'])}</p>
+          <p>%%WATER%%</p>
         </article>
         <article>
           <h3>Soil</h3>
-          <p>{html.escape(details['soil'])}</p>
+          <p>%%SOIL%%</p>
         </article>
         <article>
           <h3>Fertilizer</h3>
-          <p>{html.escape(details['fertilizer'])}</p>
+          <p>%%FERTILIZER%%</p>
         </article>
         <article>
           <h3>Pruning</h3>
-          <p>{html.escape(details['pruning'])}</p>
+          <p>%%PRUNING%%</p>
         </article>
         <article>
           <h3>Companions</h3>
-          <p>{html.escape(details['companions'])}</p>
+          <p>%%COMPANIONS%%</p>
         </article>
       </div>
     </section>
 
-    <section class=\"card\">
+    <section class="card">
       <h2>Personal notes</h2>
-      <p>Add your experience, pests, recipes, or harvest details here.</p>
-      <p><a href=\"../index.html\">← Back to home</a></p>
+      <div id="personal-notes" class="editable-block" contenteditable="true">%%PERSONAL_NOTES%%</div>
+      <p><a href="../index.html">← Back to home</a></p>
     </section>
   </main>
-  <footer class=\"site-footer\">© 2026 Family Garden</footer>
-  <script src=\"../theme.js\"></script>  <script src="../search.js"></script>  <script src=\"../weather.js\"></script>
+  <footer class="site-footer">© 2026 Family Garden</footer>
+  <script>
+    (function(){
+      const key = "__STORAGE_KEY__";
+      const saved = localStorage.getItem(key);
+      let data = saved ? JSON.parse(saved) : {};
+      document.addEventListener('DOMContentLoaded', ()=>{
+        document.querySelectorAll('.editable').forEach((el)=>{
+          const k = el.dataset.key;
+          if (data[k]) el.textContent = data[k];
+          el.setAttribute('contenteditable','true');
+          el.addEventListener('blur', ()=>{
+            data[k] = el.textContent.trim();
+            localStorage.setItem(key, JSON.stringify(data));
+          });
+        });
+        const notes = document.getElementById('personal-notes');
+        if (notes) {
+          if (data['personal_notes']) notes.textContent = data['personal_notes'];
+          notes.addEventListener('blur', ()=>{
+            data['personal_notes'] = notes.textContent.trim();
+            localStorage.setItem(key, JSON.stringify(data));
+          });
+        }
+      });
+    })();
+  </script>
+  <script src="../theme.js"></script>  <script src="../search.js"></script>  <script src="../weather.js"></script>
 </body>
-</html>"""
+</html>'''
 
-
-def make_index_html(items: list[tuple[str, str, str, dict[str, str]]]) -> str:
-    sections: dict[str, list[str]] = {}
-    for title, page, image, details in items:
-        category = details.get("category", "Other")
-        sections.setdefault(category, []).append(
-            f"      <article class='plant-card'>\n        <a href='{html.escape(page)}'>\n          <div class='plant-card-image-frame'>\n            <img src='{html.escape(image)}' alt='{html.escape(title)} thumbnail'>\n          </div>\n          <h2>{html.escape(title)}</h2>\n          <p>Tap to view its care page.</p>\n        </a>\n      </article>"
-        )
-
-    category_emojis = {
-        "Flowers": "🌸",
-        "Vines & Climbers": "🌿",
-        "Vegetables": "🥕",
-        "Herbs": "🌿",
-        "Indoor Plants": "🪴",
-        "Perennials": "🌳",
-        "Other": "🌱",
-    }
-
-    categories_html = []
-    for category in ["Flowers", "Vines & Climbers", "Vegetables", "Herbs", "Indoor Plants", "Perennials", "Other"]:
-        cards = sections.get(category)
-        if not cards:
-            continue
-
-        rows = []
-        for i in range(0, len(cards), 4):
-            row_cards = cards[i:i+4]
-            rows.append(
-                "      <div class='plant-row'>\n" + "\n".join(row_cards) + "\n      </div>"
-            )
-
-        section_id = slugify(category)
-        categories_html.append(
-            f"    <section class='category-section' id='{section_id}'>\n      <div class='category-header'>\n        <h2>{html.escape(category_emojis.get(category, '🌱'))} {html.escape(category)}</h2>\n        <span>{len(cards)} plants</span>\n      </div>\n" + "\n".join(rows) + "\n    </section>"
-        )
-
-    browse_links = []
-    for category in ["Flowers", "Vines & Climbers", "Vegetables", "Herbs", "Indoor Plants", "Perennials", "Other"]:
-        if category in sections:
-            browse_links.append(
-                f"      <a class='browse-link' href='#{slugify(category)}'>{html.escape(category_emojis.get(category, '🌱'))} {html.escape(category)}</a>"
-            )
-
-    search_data_json = json.dumps(
-        [{"title": title, "url": page} for title, page, _image, _details in items],
-        ensure_ascii=False,
-    )
-    search_script = f'<script type="application/json" id="plant-search-data">{search_data_json}</script>'
-
-    return f"""<!doctype html>
-<html lang=\"en\">
-<head>
-  <meta charset=\"utf-8\">
-  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">
-  <title>Family Garden</title>
-  <link rel=\"stylesheet\" href=\"styles.css\">
-  <meta name=\"description\" content=\"Personal plant garden - care notes and photos\">
-</head>
-<body class=\"homepage\">
-  <header class=\"site-header\">
-    <div class=\"top-bar\">
-      <a class=\"home-button\" href=\"index.html\">Home</a>
-      <div class=\"search-wrapper\">
-        <input id=\"plantSearch\" class=\"search-input\" type=\"search\" placeholder=\"Search plants...\" aria-label=\"Search plant names\">
-        <button id=\"searchClear\" class=\"search-clear\" type=\"button\" aria-label=\"Clear search\">×</button>
-      </div>
-    </div>
-    <button class=\"theme-toggle\" id=\"themeToggle\" type=\"button\" aria-label=\"Toggle dark mode\">☀️</button>
-    <h1>Family Garden</h1>
-    <p class=\"tagline\">Plants I care for and their care notes</p>
-  </header>
-  {search_script}
-
-  <main class=\"container\">
-    <section class=\"hero-card\">
-      <div>
-        <p class=\"eyebrow\">Browse your garden</p>
-        <h2>Flowers, vines, herbs, and indoor favorites are grouped so the collection stays easy to scan.</h2>
-      </div>
-      <div class=\"browse-links\">
-{chr(10).join(browse_links)}
-      </div>
-    </section>
-{chr(10).join(categories_html)}
-  </main>
-
-  <footer class=\"site-footer\">© 2026 Family Garden</footer>
-  <script src=\"theme.js\"></script>
-  <script src=\"search.js\"></script>
-</body>
-</html>"""
-
-
-def main() -> None:
-    if not IMAGE_DIR.exists():
-        raise SystemExit(f"Image directory not found: {IMAGE_DIR}")
-
-    PLANT_DIR.mkdir(exist_ok=True)
-    image_files = [p for p in sorted(IMAGE_DIR.iterdir()) if p.suffix.lower() in IMAGE_EXTENSIONS and p.is_file()]
-
-    if not image_files:
-        raise SystemExit("No image files found in the images directory.")
-
-    pages: list[tuple[str, str, str, dict[str, str]]] = []
-    for image_file in image_files:
-        stem = image_file.stem
-        title = titleize(stem)
-        slug = slugify(stem)
-        page_name = f"{slug}.html"
-        details = get_plant_detail(slug, title)
-        pages.append((title, f"plants/{page_name}", f"images/{image_file.name}", details))
-
-    for title, page, image, details in pages:
-        page_path = PLANT_DIR / Path(page).name
-        page_html = plant_page_html(
-            title,
-            f"../{image}",
-            Path(image).name,
-            details,
-            search_data_script(pages),
-        )
-        page_path.write_text(page_html, encoding="utf-8")
-
-    INDEX_FILE.write_text(make_index_html(pages), encoding="utf-8")
-
-    for old_page in OLD_SAMPLE_PAGES:
-        old_path = PLANT_DIR / old_page
-        if old_path.exists():
-            old_path.unlink()
-
-    print(f"Generated {len(pages)} plant pages and updated {INDEX_FILE}")
-
-
-if __name__ == "__main__":
-    main()
+    out = template.replace('%%TITLE%%', html.escape(title))
+    out = out.replace('%%SEARCH_SCRIPT%%', search_script)
+    out = out.replace('%%IMAGE_PATH%%', html.escape(image_path))
+    out = out.replace('%%IMAGE_FILENAME%%', html.escape(image_filename))
+    out = out.replace('%%SCIENTIFIC%%', html.escape(details.get('scientific_name','')))
+    out = out.replace('%%PLANT_TYPE%%', html.escape(details.get('plant_type','')))
+    out = out.replace('%%HARDINESS%%', html.escape(details.get('hardiness','')))
+    out = out.replace('%%BLOOM_TIME%%', html.escape(details.get('bloom_time','')))
+    out = out.replace('%%LOCATION%%', html.escape(details.get('location','')))
+    out = out.replace('%%DATE_PLANTED%%', html.escape(details.get('date_planted','')))
+    out = out.replace('%%LAST_WATERED%%', html.escape(details.get('last_watered','')))
+    out = out.replace('%%NOTES%%', html.escape(details.get('notes','')))
+    out = out.replace('%%SUN%%', html.escape(details.get('sun','')))
+    out = out.replace('%%WATER%%', html.escape(details.get('water','')))
+    out = out.replace('%%SOIL%%', html.escape(details.get('soil','')))
+    out = out.replace('%%FERTILIZER%%', html.escape(details.get('fertilizer','')))
+    out = out.replace('%%PRUNING%%', html.escape(details.get('pruning','')))
+    out = out.replace('%%COMPANIONS%%', html.escape(details.get('companions','')))
+    out = out.replace('%%PERSONAL_NOTES%%', html.escape(details.get('personal_notes','Add your experience, pests, recipes, or harvest details here.')))
+    out = out.replace('__STORAGE_KEY__', storage_key)
+    return out
